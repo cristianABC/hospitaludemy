@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { RegisterComponent } from './login/register.component';
 import { PagesModule } from './pages/pages.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,7 @@ import { PagesModule } from './pages/pages.module';
     RegisterComponent
   ],
   imports: [
-    BrowserModule, APP_ROUTES, PagesModule
+    BrowserModule, APP_ROUTES, PagesModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
