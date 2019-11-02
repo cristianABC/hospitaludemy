@@ -16,7 +16,8 @@ import { APP_ROUTES } from './app.routes';
 import { RegisterComponent } from './login/register.component';
 
 import { PagesModule } from './pages/pages.module';
-import { SettingsService } from './services/settings.service';
+import { SettingsService } from './services/settings/settings.service';
+import { ServiceModule } from './services/service.module';
 
 
 
@@ -27,9 +28,9 @@ import { SettingsService } from './services/settings.service';
     RegisterComponent
   ],
   imports: [
-    BrowserModule, APP_ROUTES, PagesModule, FormsModule
+    BrowserModule, APP_ROUTES, PagesModule, FormsModule, ServiceModule
   ],
-  providers: [SettingsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
