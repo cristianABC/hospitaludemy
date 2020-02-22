@@ -5,13 +5,14 @@ import { URL_HOST } from '../../config/config';
 
 import {map} from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { CargarArchivoService } from '../cargarArchivo/cargar-archivo.service';
 
 
 @Injectable()
 export class UsuarioService {
   token:string;
   usuario:Usuario;
-  constructor(public http: HttpClient, public router:Router) {
+  constructor(public http: HttpClient, public router:Router, public _cargaArchivo: CargarArchivoService) {
     console.log("Servicio funcionando")
     this.cargarStorage();
    }
@@ -83,4 +84,17 @@ export class UsuarioService {
        
      }));
    }
+
+   cambiarImagen(archivo:File, idusuario:string){
+     this._cargaArchivo.subirArchivo(archivo,'usuarios', idusuario)
+     .then((resp:any) =>{
+       this.usuario.img = resp.usuario.img;
+       this.guardarStorage(idusuario, this.token, this.usuario);
+      console.log(resp);
+     })
+     .catch(resp=>{
+      console.log(resp);
+     });
+   }
+
 }
