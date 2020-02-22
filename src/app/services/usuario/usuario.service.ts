@@ -4,19 +4,44 @@ import {HttpClient} from '@angular/common/http';
 import { URL_HOST } from '../../config/config';
 
 import {map} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class UsuarioService {
-
-  constructor(public http: HttpClient) {
+  token:string;
+  constructor(public http: HttpClient, public router:Router) {
     console.log("Servicio funcionando")
+    this.cargarStorage();
+   }
+  logout(){
+    this.token=null;
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+    
+  }
+   estaLogeado(){
+     if(this.token){
+       return (this.token.length>5) ? true : false;
+      }
    }
 
+   cargarStorage(){
+     if(localStorage.getItem('token')){
+       this.token =  localStorage.getItem('token');
+     }
+   }
    login(usuario:Usuario, recordar: boolean = false){
+
+    if(recordar){
+      localStorage.setItem('email', usuario.correo);
+    }else{
+      localStorage.removeItem('email');
+    }
     let url = URL_HOST + '/login';
     return this.http.post(url, usuario).pipe(map((resp:any)=>{
         localStorage.setItem('id', resp.id);
+        this.token = resp.token;
         localStorage.setItem('token', resp.token);
         localStorage.setItem('usuario', JSON.stringify(resp.usuario));
         return true;
