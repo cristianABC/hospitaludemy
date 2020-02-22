@@ -13,6 +13,7 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
         declarations:[
@@ -35,7 +36,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
             GraficoDonaComponent
             ],
             imports:[
-                SharedModule, PAGES_ROUTES, FormsModule, ChartsModule
+                SharedModule, PAGES_ROUTES, FormsModule, ChartsModule, PipesModule
             ]
 })
 export class PagesModule {}

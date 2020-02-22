@@ -10,13 +10,16 @@ import { Router } from '@angular/router';
 @Injectable()
 export class UsuarioService {
   token:string;
+  usuario:Usuario;
   constructor(public http: HttpClient, public router:Router) {
     console.log("Servicio funcionando")
     this.cargarStorage();
    }
   logout(){
     this.token=null;
+    this.usuario = null;
     localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
     this.router.navigate(['/login']);
     
   }
@@ -29,6 +32,7 @@ export class UsuarioService {
    cargarStorage(){
      if(localStorage.getItem('token')){
        this.token =  localStorage.getItem('token');
+       this.usuario = JSON.parse(localStorage.getItem('usuario'));
      }
    }
    login(usuario:Usuario, recordar: boolean = false){
